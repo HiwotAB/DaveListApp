@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.ArrayList;
 
@@ -61,19 +60,41 @@ public class MainController {
         roomRepostory.save(room);
         return "dispRoomIfo";
     }
+    @RequestMapping("/updateOwner/{id}")
+    public String updateOwnerInfo(@PathVariable("id") long id, Model model){
+        model.addAttribute("newPerson", personRepostory.findOne(id));
+        return "addOwnerInfo";
+    }
 
+    @RequestMapping("/updateRoom/{id}")
+    public String updateRoomInfo(@PathVariable("id") long id, Model model){
+        model.addAttribute("newRoom", roomRepostory.findOne(id));
+        return "addRoomInfo";
+    }
     @GetMapping("/dispAllRooms")
     public String listAllRoomsInfo(Model model) {
         Room room=new Room();
         Person person = personRepostory.findOne(new Long(1));
         ArrayList<Room> roomArrayList = (ArrayList<Room>) roomRepostory.findAll();
         person.setRoomArrayList(roomArrayList);
-        if (room.getAvailability() != null && room.getAvailability()=="yes") {
-            model.addAttribute("searchPerson", person);
-            return "dispRented";
-        } else
-            model.addAttribute("searchPersons", person);
-        return "dispNotRented";
+        model.addAttribute("searchPerson", person);
+        return "dispAllRooms";
     }
+    @GetMapping("/Rent")
+    public String checkRent(Model model)
+    {
+        Iterable<Room> notavailable = roomRepostory.findAllByAvailability(true);
+        model.addAttribute("notAvailable", notavailable);
+        return "Rent";
+    }
+    @GetMapping("/notRent")
+    public String checkNotRent(Model model)
+    {
+        Iterable<Room> available = roomRepostory.findAllByAvailability(false);
+        model.addAttribute("availables", available);
+        return "notRent";
+    }
+
+
 
 }

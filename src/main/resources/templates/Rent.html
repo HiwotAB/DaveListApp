@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org">
+<head th:replace="base :: header">
+    <title>Display Not Available Rooms Info</title>
+</head>
+<body>
+
+<!-- Header -->
+<div th:replace="base :: navlinks"></div>
+<header id="top" class="header">
+    <div class="text-vertical-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="header-content">
+                        <div class="header-content-inner">
+                            <div class="container">
+                                <form class="well form-horizontal" th:action="@{/Rent}" th:object="${notAvailable}" method="">
+                                    <fieldset>
+                                        <div class="container">
+                                            <div class="bs-callout bs-callout-success">
+                                                <table class="table table-striped">
+                                                    <caption> <h4><b>Room Information</b></h4></caption>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Description</th>
+                                                        <th>Rules</th>
+                                                        <th>Wifi</th>
+                                                        <th>Cable</th>
+                                                        <th>Private Bathroom</th>
+                                                        <th>Availability</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody align="left">
+                                                    <tr th:each="roomsList : ${notAvailable}">
+                                                        <td th:text="${roomsList.description}"></td>
+                                                        <td th:text="${roomsList.rules}" ></td>
+                                                        <td th:text="${roomsList.wifi}"></td>
+                                                        <td th:text="${roomsList.cable}"></td>
+                                                        <td th:text="${roomsList.pvBathroom}"></td>
+                                                        <td th:text="${roomsList.availability}"></td>
+                                                        <td>
+                                                            <a th:href="@{/updateRoom/{id}(id=${roomsList.id})}">Update</a>
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</header>
+</body>
+</html>

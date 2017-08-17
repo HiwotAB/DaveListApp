@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -17,19 +18,26 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @NotNull
+    @NotEmpty
     @Size(min=2)
     private String firstname;
-    @NotNull
+    @NotEmpty
     @Size(min=2)
     private String lastname;
     @NotNull
-    @Size(min=12)
+    @Min(10)
     private String phone;
-    @NotNull
     @NotEmpty
     @Email
     private String email;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public ArrayList<Room> roomArrayList;
     public String getFirstname() {

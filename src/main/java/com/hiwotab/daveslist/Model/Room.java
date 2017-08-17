@@ -20,12 +20,35 @@ public class Room {
     @NotNull
     private boolean wifi;
     @NotNull
-    private boolean cable;
+    private String cable;
     @NotNull
-    private String pvBathroom;
+    private boolean pvBathroom;
     @NotNull
-    @Size(min=2)
-    private String availability;
+    private boolean availability;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isPvBathroom() {
+        return pvBathroom;
+    }
+
+    public void setPvBathroom(boolean pvBathroom) {
+        this.pvBathroom = pvBathroom;
+    }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
 
     public String getDescription() {
         return description;
@@ -50,27 +73,12 @@ public class Room {
         this.wifi = wifi;
     }
 
-    public boolean isCable() {
+
+    public String getCable() {
         return cable;
     }
 
-    public void setCable(boolean cable) {
+    public void setCable(String cable) {
         this.cable = cable;
-    }
-
-    public String getPvBathroom() {
-        return pvBathroom;
-    }
-
-    public void setPvBathroom(String pvBathroom) {
-        this.pvBathroom = pvBathroom;
-    }
-
-    public String getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(String availability) {
-        this.availability = availability;
     }
 }
