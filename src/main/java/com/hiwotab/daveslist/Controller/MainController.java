@@ -25,10 +25,9 @@ public class MainController {
     public String showHomePages() {
         return "index";
     }
-
-    @GetMapping("/homePage")
-    public String showHomePage() {
-        return "index";
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
     }
 
     @GetMapping("/addOwnerInfo")
